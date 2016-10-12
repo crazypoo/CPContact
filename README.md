@@ -23,6 +23,8 @@ pod "CPContact"
 
 ## Guide
 
+The following code is just for test. Take it easy.😄 
+
     CFXABContactModel *model = [[CFXABContactModel alloc]init];
     model.basicModel = [[CFXABBasicInfoModel alloc]init];
     model.basicModel.firstName = @"xiao";
