@@ -1,4 +1,4 @@
-use_frameworks!
+!use_frameworks!
 
 target 'CPContact_Example' do
   pod 'CPContact', :path => '../'
@@ -6,6 +6,6 @@ target 'CPContact_Example' do
   target 'CPContact_Tests' do
     inherit! :search_paths
 
-    pod 'FBSnapshotTestCase'
+    #pod 'FBSnapshotTestCase'
   end
 end

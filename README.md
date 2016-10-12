@@ -10,6 +10,7 @@
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ## Requirements
+iOS8+
 
 ## Installation
 
@@ -20,10 +21,52 @@ it, simply add the following line to your Podfile:
 pod "CPContact"
 ```
 
+## Guide
+
+    CFXABContactModel *model = [[CFXABContactModel alloc]init];
+    model.basicModel = [[CFXABBasicInfoModel alloc]init];
+    model.basicModel.firstName = @"xiao";
+    model.basicModel.lastName = @"crespo";
+    model.basicModel.title = @"ceo";
+    CFXABPhoneModel *phone = [[CFXABPhoneModel alloc]init];
+    phone.number = @"1111";
+    phone.type = @"office";
+    model.phoneArray = @[phone];
+    [CFXContact addReocrdWithModel:model success:^(BOOL success) {
+        NSLog(@"test1: %d",success);
+        
+        [CFXContact addPhoneNumber:@"2222" toExistFullName:@"xiao crespo" success:^(BOOL success) {
+            NSLog(@"test2: %d",success);
+            
+            [CFXContact loadContacts:^(NSArray *array) {
+                NSLog(@"test3: %lu",(unsigned long)[array count]);
+                
+                [CFXContact removedRecordWithFullName:@"xiao crespo" success:^(BOOL success) {
+                    NSLog(@"test4: %d",success);
+                    
+                    [CFXContact loadContacts:^(NSArray *array) {
+                        NSLog(@"test5: %lu",(unsigned long)[array count]);
+                        
+                        [CFXContact delAllRecord:^(BOOL success) {
+                            NSLog(@"test6: %d",success);
+                            
+                            [CFXContact loadContacts:^(NSArray *array) {
+                                NSLog(@"test7: %lu",(unsigned long)[array count]);
+                            }];
+                        }];
+                    }];
+                }];
+            }];
+        }];
+    }];
+
+## TODO
+ABAddressBook is deprecated on iOS9, so i will use CNContact instead.
+
 ## Author
 
-xiaochengfei, xiaochengfei@didichuxing.com
+CrespoXiao <http://weibo.com/crespoxiao>
 
 ## License
 
-CPContact is available under the MIT license. See the LICENSE file for more info.
+CPCache is available under the MIT license. See the [LICENSE](LICENSE) file for more info.
