@@ -29,7 +29,7 @@ void CFXABAddressBookExternalChangeCallback(ABAddressBookRef addressBookRef, CFD
         _addressBook = ABAddressBookCreateWithOptions(NULL, error);
         if (error){
             NSString *errorReason = (__bridge_transfer NSString *)CFErrorCopyFailureReason(*error);
-            return nil;
+            NSLog(@"create addressbook failed");
         }
     }
     return self;
